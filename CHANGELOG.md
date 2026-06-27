@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/arcangelo7/software-citation-sync/compare/v1.1.3...v2.0.0) (2026-06-27)
+
+
+* feat!: rename project package to software citation sync [release] ([62a217e](https://github.com/arcangelo7/software-citation-sync/commit/62a217e3be5fa81a679ecfc41cc903ce0fe782c6))
+
+
+### BREAKING CHANGES
+
+* rename the Python package from software_citation_action to software_citation_sync.
+
 ## [1.1.3](https://github.com/arcangelo7/software-citation-sync/compare/v1.1.2...v1.1.3) (2026-06-27)
 
 
