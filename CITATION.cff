@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: software-citation-action
+authors:
+  - name: Arcangelo Massari
+version: 1.1.0
+date-released: '2026-06-27'
+repository-code: https://github.com/arcangelo7/software-citation-action
+repository: https://archive.softwareheritage.org/browse/origin/?origin_url=https%3A%2F%2Fgithub.com%2Farcangelo7%2Fsoftware-citation-action
