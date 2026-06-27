@@ -9,7 +9,7 @@ on:
     branches:
       - "**"
   pull_request:
-    branches: [main]
+    branches: [master]
 
 permissions:
   contents: read
@@ -42,13 +42,13 @@ jobs:
         if: matrix.python-version == '3.13'
         run: uv run genbadge coverage -i coverage.xml -o coverage-badge.svg
       - name: Upload coverage report
-        if: matrix.python-version == '3.13' && github.ref == 'refs/heads/main'
+        if: matrix.python-version == '3.13' && github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: coverage-report
           path: htmlcov
       - name: Upload coverage badge
-        if: matrix.python-version == '3.13' && github.ref == 'refs/heads/main'
+        if: matrix.python-version == '3.13' && github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: coverage-badge

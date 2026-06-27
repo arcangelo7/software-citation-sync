@@ -6,7 +6,7 @@ SPDX-License-Identifier: ISC
 
 # Software citation action
 
-[![Test](https://github.com/arcangelo7/software-citation-action/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/arcangelo7/software-citation-action/actions/workflows/test.yml)
+[![Test](https://github.com/arcangelo7/software-citation-action/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/arcangelo7/software-citation-action/actions/workflows/test.yml)
 [![Coverage](https://arcangelo7.github.io/software-citation-action/coverage/coverage-badge.svg)](https://arcangelo7.github.io/software-citation-action/coverage/)
 [![REUSE status](https://api.reuse.software/badge/github.com/arcangelo7/software-citation-action)](https://api.reuse.software/info/github.com/arcangelo7/software-citation-action)
 
