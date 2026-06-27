@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/arcangelo7/software-citation-action/compare/v1.1.1...v1.1.2) (2026-06-27)
+
+
+### Bug Fixes
+
+* remove stale CITATION.cff [release] ([6dd6696](https://github.com/arcangelo7/software-citation-action/commit/6dd6696179e3417164244cb6059b0625c8320456))
+
 ## [1.1.1](https://github.com/arcangelo7/software-citation-action/compare/v1.1.0...v1.1.1) (2026-06-27)
 
 
