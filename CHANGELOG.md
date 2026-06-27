@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/arcangelo7/software-citation-action/compare/v1.1.0...v1.1.1) (2026-06-27)
+
+
+### Bug Fixes
+
+* store Software Heritage snapshot in citation metadata [release] ([83eaad0](https://github.com/arcangelo7/software-citation-action/commit/83eaad0e200e3bb91f2a021599b2ecb769bfc74d))
+
 # [1.1.0](https://github.com/arcangelo7/software-citation-action/compare/v1.0.0...v1.1.0) (2026-06-27)
 
 
