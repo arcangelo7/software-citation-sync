@@ -41,14 +41,14 @@ The action manages one marked block delimited by the `software-citation-action:s
 The BibTeX entry is generated from the updated `CITATION.cff`.
 
 <!-- software-citation-action:start -->
-To cite the latest version of this software (2.0.0), use this BibTeX entry:
+To cite the latest version of this software (2.0.1), use this BibTeX entry:
 
 ```bibtex
-@software{software-citation-sync-2.0.0,
+@software{software-citation-sync-2.0.1,
 author = {Arcangelo Massari},
 title = {software-citation-sync},
-url = {https://archive.softwareheritage.org/swh:1:snp:8b6661b3ce03bb6c383445d39bb90247ad478cc3;origin=https://github.com/arcangelo7/software-citation-sync},
-version = {2.0.0},
+url = {https://archive.softwareheritage.org/swh:1:snp:a9d121c4ce041f8e2ac0204160becf63e1ef0d5a;origin=https://github.com/arcangelo7/software-citation-sync},
+version = {2.0.1},
 year = {2026}
 }
 ```

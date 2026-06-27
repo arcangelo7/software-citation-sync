@@ -3,6 +3,6 @@ message: If you use this software, please cite it using these metadata.
 title: software-citation-sync
 authors:
   - name: Arcangelo Massari
-version: 2.0.0
+version: 2.0.1
 date-released: '2026-06-27'
-url: https://archive.softwareheritage.org/swh:1:snp:8b6661b3ce03bb6c383445d39bb90247ad478cc3;origin=https://github.com/arcangelo7/software-citation-sync
+url: https://archive.softwareheritage.org/swh:1:snp:a9d121c4ce041f8e2ac0204160becf63e1ef0d5a;origin=https://github.com/arcangelo7/software-citation-sync
