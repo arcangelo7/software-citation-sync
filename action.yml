@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2026 Arcangelo Massari <github@a.arcangelomassari.com>
+#
+# SPDX-License-Identifier: ISC
+
+name: Software citation
+description: Sync CITATION.cff metadata and archive releases in Software Heritage.
+
+outputs:
+  changed:
+    description: Whether CITATION.cff or README.md changed.
+    value: ${{ steps.run.outputs.changed }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+      with:
+        python-version: "3.13"
+    - name: Install software citation action
+      shell: bash
+      run: python -m pip install "$GITHUB_ACTION_PATH"
+    - name: Run software citation action
+      id: run
+      shell: bash
+      run: python -m software_citation_action.github_action
