@@ -7,6 +7,8 @@ SPDX-License-Identifier: ISC
 # Software citation action
 
 [![Test](https://github.com/arcangelo7/software-citation-action/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/arcangelo7/software-citation-action/actions/workflows/test.yml)
+[![Pyright](https://github.com/arcangelo7/software-citation-action/actions/workflows/pyright.yml/badge.svg?branch=master)](https://github.com/arcangelo7/software-citation-action/actions/workflows/pyright.yml)
+[![Ruff](https://github.com/arcangelo7/software-citation-action/actions/workflows/ruff.yml/badge.svg?branch=master)](https://github.com/arcangelo7/software-citation-action/actions/workflows/ruff.yml)
 [![Coverage](https://arcangelo7.github.io/software-citation-action/coverage/coverage-badge.svg)](https://arcangelo7.github.io/software-citation-action/coverage/)
 [![REUSE status](https://api.reuse.software/badge/github.com/arcangelo7/software-citation-action)](https://api.reuse.software/info/github.com/arcangelo7/software-citation-action)
 
@@ -22,7 +24,7 @@ The action uses:
 
 When `CITATION.cff` is absent, it creates one from project metadata in `package.json` or `pyproject.toml`.
 It updates citation metadata, updates the marked README citation block, and validates `CITATION.cff`.
-It also sends the repository URL to Software Heritage for archiving, waits for the archive job to finish, and uses the returned snapshot URL in the README BibTeX entry.
+It also sends the repository URL to Software Heritage for archiving, waits for the archive job to finish, and uses the returned snapshot URL in `CITATION.cff` and in the README BibTeX entry.
 The selected manifest must define a string `version`.
 
 ## GitHub action

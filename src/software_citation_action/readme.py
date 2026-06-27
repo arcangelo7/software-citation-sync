@@ -12,9 +12,8 @@ END_MARKER = "<!-- software-citation-action:end -->"
 BIBTEX_REFERENCE_PATTERN = re.compile(r"[^0-9A-Za-z_.:-]+")
 
 
-def bibtex_reference(repository_code: str, version: str) -> str:
-    repository_name = repository_code.rstrip("/").rsplit("/", maxsplit=1)[1]
-    return BIBTEX_REFERENCE_PATTERN.sub("-", f"{repository_name}-{version}").strip("-")
+def bibtex_reference(title: str, version: str) -> str:
+    return BIBTEX_REFERENCE_PATTERN.sub("-", f"{title}-{version}").strip("-")
 
 
 def expected_readme_block(version: str, bibtex: str) -> str:

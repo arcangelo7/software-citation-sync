@@ -51,10 +51,10 @@ def test_write_updates_citation_and_readme(tmp_path: Path) -> None:
         readme_path=readme_path,
         version="2.8.0",
         date_released="2026-06-25",
-        repository_code="https://github.com/arcangelo7/ramose",
+        software_heritage_url=SWH_URL,
     )
     citation_changed = write_citation_metadata(config)
-    readme_changed = write_readme(config, SWH_URL)
+    readme_changed = write_readme(config)
 
     assert citation_changed is True
     assert readme_changed is True
@@ -71,10 +71,7 @@ def test_write_updates_citation_and_readme(tmp_path: Path) -> None:
             "    given-names: Arcangelo",
             "version: 2.8.0",
             "date-released: '2026-06-25'",
-            "repository-code: https://github.com/arcangelo7/ramose",
-            "repository: "
-            "https://archive.softwareheritage.org/browse/origin/?origin_url="
-            "https%3A%2F%2Fgithub.com%2Farcangelo7%2Framose",
+            f"url: {SWH_URL}",
             "",
         ],
     )
@@ -86,11 +83,11 @@ def test_write_updates_citation_and_readme(tmp_path: Path) -> None:
             "To cite the latest version of this software (2.8.0), use this BibTeX entry:",
             "",
             "```bibtex",
-            "@misc{ramose-2.8.0,",
+            "@software{RAMOSE-2.8.0,",
             "author = {Massari, Arcangelo},",
-            "month = {6},",
             "title = {RAMOSE},",
             f"url = {{{SWH_URL}}},",
+            "version = {2.8.0},",
             "year = {2026}",
             "}",
             "```",
@@ -109,7 +106,7 @@ def test_write_creates_missing_citation(tmp_path: Path) -> None:
             readme_path=tmp_path / "README.md",
             version="2.8.0",
             date_released="2026-06-25",
-            repository_code="https://github.com/arcangelo7/ramose",
+            software_heritage_url=SWH_URL,
         ),
         ProjectMetadata(
             title="ramose",
@@ -127,16 +124,13 @@ def test_write_creates_missing_citation(tmp_path: Path) -> None:
             "  - name: Arcangelo Massari",
             "version: 2.8.0",
             "date-released: '2026-06-25'",
-            "repository-code: https://github.com/arcangelo7/ramose",
-            "repository: "
-            "https://archive.softwareheritage.org/browse/origin/?origin_url="
-            "https%3A%2F%2Fgithub.com%2Farcangelo7%2Framose",
+            f"url: {SWH_URL}",
             "",
         ],
     )
 
 
-def test_check_reports_exact_metadata_errors(tmp_path: Path) -> None:
+def test_check_reports_readme_block_error(tmp_path: Path) -> None:
     citation_path = tmp_path / "CITATION.cff"
     readme_path = tmp_path / "README.md"
     # REUSE-IgnoreStart
@@ -149,8 +143,9 @@ def test_check_reports_exact_metadata_errors(tmp_path: Path) -> None:
                 "authors:",
                 "  - family-names: Massari",
                 "    given-names: Arcangelo",
-                "version: 2.0.0",
-                "date-released: '2026-04-03'",
+                "version: 2.8.0",
+                "date-released: '2026-06-25'",
+                f"url: {SWH_URL}",
                 "",
             ],
         ),
@@ -165,20 +160,11 @@ def test_check_reports_exact_metadata_errors(tmp_path: Path) -> None:
             readme_path=readme_path,
             version="2.8.0",
             date_released="2026-06-25",
-            repository_code="https://github.com/arcangelo7/ramose",
+            software_heritage_url=SWH_URL,
         ),
-        SWH_URL,
     )
 
-    assert result.errors == (
-        "CITATION.cff `version` is `2.0.0`, expected `2.8.0`",
-        "CITATION.cff `date-released` is `2026-04-03`, expected `2026-06-25`",
-        "CITATION.cff `repository-code` is `None`, expected `https://github.com/arcangelo7/ramose`",
-        "CITATION.cff `repository` is `None`, expected "
-        "`https://archive.softwareheritage.org/browse/origin/?origin_url="
-        "https%3A%2F%2Fgithub.com%2Farcangelo7%2Framose`",
-        f"{readme_path} citation block is out of date",
-    )
+    assert result.errors == (f"{readme_path} citation block is out of date",)
 
 
 def test_write_readme_rejects_incomplete_markers(tmp_path: Path) -> None:
@@ -189,6 +175,6 @@ def test_write_readme_rejects_incomplete_markers(tmp_path: Path) -> None:
         ValueError,
         match=r"^README citation block markers are incomplete or out of order$",
     ) as exc_info:
-        write_readme_block(readme_path, "2.8.0", "@misc{ramose-2.8.0}")
+        write_readme_block(readme_path, "2.8.0", "@software{RAMOSE-2.8.0}")
 
     assert str(exc_info.value) == "README citation block markers are incomplete or out of order"

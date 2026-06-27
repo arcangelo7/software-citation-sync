@@ -13,7 +13,6 @@ from software_citation_action.discovery import discover_project_metadata, discov
 from software_citation_action.software_heritage import archive_origin
 from software_citation_action.sync import (
     check,
-    check_citation,
     write_citation_metadata,
     write_readme,
 )
@@ -28,30 +27,24 @@ def main() -> None:
     root = Path.cwd()
     version = _discover_required_version(root)
     date_released = _current_date()
-    repository_code = _current_repository_url()
+    origin_url = _current_repository_url()
+    software_heritage_url = archive_origin(
+        origin_url,
+        timeout_seconds=ARCHIVE_TIMEOUT_SECONDS,
+        poll_interval_seconds=ARCHIVE_POLL_INTERVAL_SECONDS,
+    )
     project_metadata = _discover_required_project_metadata(root) if not CITATION_PATH.exists() else None
     citation_config = CitationConfig(
         citation_path=CITATION_PATH,
         readme_path=README_PATH,
         version=version,
         date_released=date_released,
-        repository_code=repository_code,
+        software_heritage_url=software_heritage_url,
     )
 
     citation_changed = write_citation_metadata(citation_config, project_metadata)
-    citation_check_result = check_citation(citation_config)
-    for error in citation_check_result.errors:
-        print(error)
-    if not citation_check_result.ok:
-        raise SystemExit(1)
-
-    swh_url = archive_origin(
-        repository_code,
-        timeout_seconds=ARCHIVE_TIMEOUT_SECONDS,
-        poll_interval_seconds=ARCHIVE_POLL_INTERVAL_SECONDS,
-    )
-    readme_changed = write_readme(citation_config, swh_url)
-    check_result = check(citation_config, swh_url)
+    readme_changed = write_readme(citation_config)
+    check_result = check(citation_config)
     for error in check_result.errors:
         print(error)
     if not check_result.ok:

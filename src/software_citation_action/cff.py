@@ -4,13 +4,10 @@
 
 from __future__ import annotations
 
-import copy
 import subprocess
 from io import StringIO
 from pathlib import Path
-from urllib.parse import quote
 
-from cffconvert.citation import Citation  # type: ignore[reportMissingTypeStubs]
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap, CommentedSeq
 
@@ -37,11 +34,18 @@ def render_citation(data: CommentedMap) -> str:
     return buffer.getvalue()
 
 
-def render_citation_bibtex(data: CommentedMap, reference: str, url: str) -> str:
-    bibtex_data = copy.deepcopy(data)
-    bibtex_data["url"] = url
-    citation = Citation(render_citation(bibtex_data))
-    return citation.as_bibtex(reference=reference).strip()
+def render_citation_bibtex(data: CommentedMap, reference: str) -> str:
+    return "\n".join(
+        [
+            f"@software{{{reference},",
+            f"author = {{{_bibtex_authors(data['authors'])}}},",
+            f"title = {{{data['title']}}},",
+            f"url = {{{data['url']}}},",
+            f"version = {{{data['version']}}},",
+            f"year = {{{str(data['date-released'])[:4]}}}",
+            "}",
+        ],
+    )
 
 
 def create_citation(project_metadata: ProjectMetadata) -> CommentedMap:
@@ -70,21 +74,7 @@ def write_citation(path: Path, data: CommentedMap) -> bool:
 def apply_citation_metadata(data: CommentedMap, config: CitationConfig) -> None:
     data["version"] = config.version
     data["date-released"] = config.date_released
-    data["repository-code"] = config.repository_code
-    data["repository"] = origin_archive_url(config.repository_code)
-
-
-def check_citation_metadata(data: CommentedMap, config: CitationConfig) -> tuple[str, ...]:
-    errors = [
-        f"CITATION.cff is missing `{key}`" for key in ("cff-version", "message", "title", "authors") if key not in data
-    ]
-    if "authors" in data and not isinstance(data["authors"], CommentedSeq):
-        errors.append("CITATION.cff `authors` must be a sequence")
-    _check_expected_value(errors, data, "version", config.version)
-    _check_expected_value(errors, data, "date-released", config.date_released)
-    _check_expected_value(errors, data, "repository-code", config.repository_code)
-    _check_expected_value(errors, data, "repository", origin_archive_url(config.repository_code))
-    return tuple(errors)
+    data["url"] = config.software_heritage_url
 
 
 def validate_with_cffconvert(path: Path) -> tuple[str, ...]:
@@ -96,11 +86,17 @@ def validate_with_cffconvert(path: Path) -> tuple[str, ...]:
     return (output or "cffconvert validation failed",)
 
 
-def origin_archive_url(origin_url: str) -> str:
-    return f"https://archive.softwareheritage.org/browse/origin/?origin_url={quote(origin_url, safe='')}"
+def _bibtex_authors(authors: object) -> str:
+    if not isinstance(authors, CommentedSeq):
+        msg = "CITATION.cff `authors` must be a sequence"
+        raise TypeError(msg)
+    return " and ".join(_bibtex_author(author) for author in authors)
 
 
-def _check_expected_value(errors: list[str], data: CommentedMap, key: str, expected: str) -> None:
-    actual = str(data[key]) if key in data else None
-    if actual != expected:
-        errors.append(f"CITATION.cff `{key}` is `{actual}`, expected `{expected}`")
+def _bibtex_author(author: object) -> str:
+    if not isinstance(author, CommentedMap):
+        msg = "CITATION.cff author entries must be mappings"
+        raise TypeError(msg)
+    if "family-names" in author and "given-names" in author:
+        return f"{author['family-names']}, {author['given-names']}"
+    return str(author["name"])

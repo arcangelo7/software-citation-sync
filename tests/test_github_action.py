@@ -96,10 +96,7 @@ def test_action_updates_files_archives_and_sets_changed_output(
             "    given-names: Arcangelo",
             "version: 2.8.0",
             "date-released: '2026-06-25'",
-            "repository-code: https://github.com/arcangelo7/ramose",
-            "repository: "
-            "https://archive.softwareheritage.org/browse/origin/?origin_url="
-            "https%3A%2F%2Fgithub.com%2Farcangelo7%2Framose",
+            f"url: {SWH_URL}",
             "",
         ],
     )
@@ -111,11 +108,11 @@ def test_action_updates_files_archives_and_sets_changed_output(
             "To cite the latest version of this software (2.8.0), use this BibTeX entry:",
             "",
             "```bibtex",
-            "@misc{ramose-2.8.0,",
+            "@software{RAMOSE-2.8.0,",
             "author = {Massari, Arcangelo},",
-            "month = {6},",
             "title = {RAMOSE},",
             f"url = {{{SWH_URL}}},",
+            "version = {2.8.0},",
             "year = {2026}",
             "}",
             "```",
@@ -171,10 +168,7 @@ def test_action_creates_missing_citation(
             "  - name: Arcangelo Massari",
             "version: 2.8.0",
             "date-released: '2026-06-25'",
-            "repository-code: https://github.com/arcangelo7/ramose",
-            "repository: "
-            "https://archive.softwareheritage.org/browse/origin/?origin_url="
-            "https%3A%2F%2Fgithub.com%2Farcangelo7%2Framose",
+            f"url: {SWH_URL}",
             "",
         ],
     )
@@ -186,11 +180,11 @@ def test_action_creates_missing_citation(
             "To cite the latest version of this software (2.8.0), use this BibTeX entry:",
             "",
             "```bibtex",
-            "@misc{ramose-2.8.0,",
+            "@software{ramose-2.8.0,",
             "author = {Arcangelo Massari},",
-            "month = {6},",
             "title = {ramose},",
             f"url = {{{SWH_URL}}},",
+            "version = {2.8.0},",
             "year = {2026}",
             "}",
             "```",

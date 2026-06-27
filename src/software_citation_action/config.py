@@ -14,7 +14,7 @@ class CitationConfig:
     readme_path: Path
     version: str
     date_released: str
-    repository_code: str
+    software_heritage_url: str
 
 
 @dataclass(frozen=True)
