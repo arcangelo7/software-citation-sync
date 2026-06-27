@@ -2,8 +2,12 @@
 #
 # SPDX-License-Identifier: ISC
 
-name: Software citation
+name: Software citation sync
 description: Sync CITATION.cff metadata and archive releases in Software Heritage.
+
+branding:
+  icon: book-open
+  color: blue
 
 outputs:
   changed:
