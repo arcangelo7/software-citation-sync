@@ -30,7 +30,7 @@ The selected manifest must define a string `version`.
 ## GitHub action
 
 ```yaml
-- uses: arcangelo7/software-citation-sync@v1
+- uses: arcangelo7/software-citation-sync@v2
 ```
 
 The action exposes `changed`, which is `true` when `CITATION.cff` or `README.md` changed.
