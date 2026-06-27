@@ -3,7 +3,8 @@ message: If you use this software, please cite it using these metadata.
 title: software-citation-action
 authors:
   - name: Arcangelo Massari
-version: 1.1.0
+version: 1.1.1
 date-released: '2026-06-27'
 repository-code: https://github.com/arcangelo7/software-citation-action
 repository: https://archive.softwareheritage.org/browse/origin/?origin_url=https%3A%2F%2Fgithub.com%2Farcangelo7%2Fsoftware-citation-action
+url: https://archive.softwareheritage.org/swh:1:snp:4bcefc21f332cf45d28e39c02a55893a5fbb7f07;origin=https://github.com/arcangelo7/software-citation-action
