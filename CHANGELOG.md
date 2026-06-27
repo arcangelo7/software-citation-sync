@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/arcangelo7/software-citation-action/compare/v1.0.0...v1.1.0) (2026-06-27)
+
+
+### Features
+
+* create citation metadata when missing [release] ([425f978](https://github.com/arcangelo7/software-citation-action/commit/425f97875285c0391178eba99e89fb1a8b988a62))
+
 # 1.0.0 (2026-06-27)
 
 
